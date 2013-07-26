@@ -21,16 +21,18 @@ public class Resource<T> {
 
 	protected Resource(DataLoader<T> dataLoader, boolean deferred) {
 		this.dataLoader = dataLoader;
-		if (!deferred)
+		if (!deferred) {
 			reload();
+		}
 	}
 
 	/**
 	 * Returns the data stored by the Resource.
 	 */
 	public T get() {
-		if (!isLoaded())
+		if (!isLoaded()) {
 			load();
+		}
 		return data;
 	}
 	
@@ -59,8 +61,9 @@ public class Resource<T> {
 	 * Loads the data if it wasn't loaded yet, it does nothing otherwise.
 	 */
 	public void load() {
-		if (!isLoaded())
+		if (!isLoaded()) {
 			data = dataLoader.load();
+		}
 	}
 
 	/**
@@ -80,6 +83,7 @@ public class Resource<T> {
 		return data != null;
 	}
 
+	@Override
 	public Resource<T> clone() {
 		return new Resource<T>(dataLoader);
 	}

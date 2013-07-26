@@ -41,6 +41,7 @@ public class ResourcesMonitorSample {
 
 		new Thread() {
 
+			@Override
 			public void run() {
 
 				try {
@@ -52,7 +53,7 @@ public class ResourcesMonitorSample {
 					e.printStackTrace();
 				}
 
-			};
+			}
 
 		}.start();
 
@@ -74,11 +75,12 @@ public class ResourcesMonitorSample {
 				add(new JButton() {
 					Resource<Image> imageResource = resourceManager.get("BlackCompanyLogo");
 
+					@Override
 					public void paint(java.awt.Graphics g) {
 						super.paint(g);
 						Image image = imageResource.get();
 						g.drawImage(image, getWidth() / 2 - image.getWidth(null) / 2, getHeight() / 2 - image.getHeight(null) / 2, null);
-					};
+					}
 
 				});
 

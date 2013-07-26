@@ -18,7 +18,7 @@ public class PropertiesImageLoader {
 	private DataSourceProvider dataSourceProvider = new DataSourceProvider();
 
 	public void setResourceManager(ResourceManager resourceManagerImpl) {
-		this.resourceManager = resourceManagerImpl;
+		resourceManager = resourceManagerImpl;
 	}
 
 	public void setDataSourceProvider(DataSourceProvider dataSourceProvider) {
@@ -26,9 +26,9 @@ public class PropertiesImageLoader {
 	}
 
 	public void load(String imagePropertiesFile) {
-		try {
+		try (InputStream imageMapStream = dataSourceProvider.get(imagePropertiesFile).getInputStream()) {
 			Properties imagesMap = new Properties();
-			InputStream imageMapStream = dataSourceProvider.get(imagePropertiesFile).getInputStream();
+			
 			imagesMap.load(imageMapStream);
 
 			for (String imageKey : imagesMap.stringPropertyNames()) {

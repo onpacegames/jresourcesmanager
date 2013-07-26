@@ -29,13 +29,15 @@ public class ClassPathDataSource implements DataSource {
 
 	public ClassPathDataSource(String path, ClassLoader classLoader) {
 		this.path = path;
-		this.resourceName = "classpath://" + path;
+		resourceName = "classpath://" + path;
 		this.classLoader = classLoader;
 	}
 
+	@Override
 	public InputStream getInputStream() {
-		if (logger.isInfoEnabled())
+		if (logger.isInfoEnabled()) {
 			logger.info("loading from thread stream " + getResourceName());
+		}
 		return classLoader.getResourceAsStream(path);
 	}
 
@@ -57,24 +59,29 @@ public class ClassPathDataSource implements DataSource {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((resourceName == null) ? 0 : resourceName.hashCode());
+		result = prime * result + (resourceName == null ? 0 : resourceName.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ClassPathDataSource other = (ClassPathDataSource) obj;
 		if (resourceName == null) {
-			if (other.resourceName != null)
+			if (other.resourceName != null) {
 				return false;
-		} else if (!resourceName.equals(other.resourceName))
+			}
+		} else if (!resourceName.equals(other.resourceName)) {
 			return false;
+		}
 		return true;
 	}
 

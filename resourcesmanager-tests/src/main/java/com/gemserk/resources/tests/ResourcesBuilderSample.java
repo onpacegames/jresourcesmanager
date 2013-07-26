@@ -63,12 +63,13 @@ public class ResourcesBuilderSample {
 						});
 
 					}
+					@Override
 					public void paint(java.awt.Graphics g) {
 						Image image = imageResource.get();
 						g.drawImage(image, getWidth() / 2 - image.getWidth(null) / 2, getHeight() / 2 - image.getHeight(null) / 2, null);
 						g.setFont(fontResource.get());
 						g.drawString("Click to exit!", 340, 200);
-					};
+					}
 					
 				});
 

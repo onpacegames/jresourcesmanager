@@ -1,8 +1,9 @@
 package com.gemserk.resources.datasources;
 
-import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.hamcrest.core.IsEqual;
@@ -13,9 +14,12 @@ public class GenericDataSourceTest {
 	
 	@Test
 	public void testGetInputStream() {
-		InputStream inputStream = createMock(InputStream.class);
-		GenericDataSource staticDataSource = new GenericDataSource(inputStream, "resource");
-		assertThat(staticDataSource.getInputStream(), IsSame.sameInstance(inputStream));
+		try (InputStream inputStream = createMock(InputStream.class)) {
+			GenericDataSource staticDataSource = new GenericDataSource(inputStream, "resource");
+			assertThat(staticDataSource.getInputStream(), IsSame.sameInstance(inputStream));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -23,5 +27,4 @@ public class GenericDataSourceTest {
 		GenericDataSource staticDataSource = new GenericDataSource(null, "resource");
 		assertThat(staticDataSource.getResourceName(), IsEqual.equalTo("resource"));
 	}
-
 }

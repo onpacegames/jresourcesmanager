@@ -56,6 +56,7 @@ public class JFrameWithImageResourceLoaderProviderSample {
 
 					Resource<Image> imageResource = resourceManager.get("BusinessCard");
 
+					@Override
 					public void paint(Graphics g) {
 						super.paint(g);
 						g.setColor(Color.gray);
@@ -63,7 +64,7 @@ public class JFrameWithImageResourceLoaderProviderSample {
 
 						Image image = imageResource.get();
 						g.drawImage(image, getWidth() / 2 - image.getWidth(null) / 2, getHeight() / 2 - image.getHeight(null) / 2, null);
-					};
+					}
 
 				});
 

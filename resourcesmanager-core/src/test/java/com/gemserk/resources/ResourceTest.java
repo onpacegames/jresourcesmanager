@@ -1,8 +1,10 @@
 package com.gemserk.resources;
 
+import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -17,6 +19,7 @@ import com.gemserk.resources.dataloaders.StaticDataLoader;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ResourceTest {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void dataShouldNotBeLoadedBeforeGetCalledFirstTimeWhenDeferred() {
 		DataLoader dataLoader = createMock(DataLoader.class);
@@ -27,6 +30,7 @@ public class ResourceTest {
 		verify(dataLoader);
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void dataShouldBeLoadedOnConstructorWhenNotDeferred() {
 		String data = "helloworld";

@@ -87,6 +87,7 @@ public class JFrameResourceReloadSample {
 						});
 					}
 
+					@Override
 					public void paint(Graphics g) {
 						super.paint(g);
 						g.setColor(Color.gray);
@@ -94,7 +95,7 @@ public class JFrameResourceReloadSample {
 
 						Image image = blackLogoImageResource.get();
 						g.drawImage(image, getWidth() / 2 - image.getWidth(null) / 2, getHeight() / 2 - image.getHeight(null) / 2, null);
-					};
+					}
 
 				});
 

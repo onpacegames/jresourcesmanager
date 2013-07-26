@@ -13,14 +13,17 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 	Map<K, Resource> resources = new HashMap<K, Resource>();
 	ArrayList<K> resourcesList = new ArrayList<K>();
 
+	@Override
 	public <T> Resource<T> get(K id) {
-		if (!resources.containsKey(id))
+		if (!resources.containsKey(id)) {
 			return null;
+		}
 		Resource resource = resources.get(id);
 		
 		// returns a new resource not tracked by the resource manager.
-		if (resource instanceof VolatileResource)
+		if (resource instanceof VolatileResource) {
 			return resource.clone();
+		}
 		
 		return resource;
 	}
@@ -28,29 +31,34 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 	@Override
 	public <T> T getResourceValue(K id) {
 		Resource<T> resource = get(id);
-		if (resource == null)
+		if (resource == null) {
 			return null;
+		}
 		return resource.get();
 	}
 
 	@Override
 	public void unloadAll() {
 		Set<K> keySet = resources.keySet();
-		for (K k : keySet) 
+		for (K k : keySet) {
 			resources.get(k).unload();
+		}
 	}
 
+	@Override
 	public void add(K id, DataLoader dataLoader) {
 		resources.put(id, new Resource(dataLoader, true));
-		if (!resourcesList.contains(id))
+		if (!resourcesList.contains(id)) {
 			resourcesList.add(id);
+		}
 	}
 
 	@Override
 	public void addVolatile(K id, DataLoader dataLoader) {
 		resources.put(id, new VolatileResource(dataLoader, true));
-		if (!resourcesList.contains(id))
+		if (!resourcesList.contains(id)) {
 			resourcesList.add(id);
+		}
 	}
 
 	@Override

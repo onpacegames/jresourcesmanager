@@ -16,6 +16,7 @@ public class ResourcesUnloadSample {
 	
 	protected static final Logger logger = LoggerFactory.getLogger(ResourcesUnloadSample.class);
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
@@ -28,21 +29,25 @@ public class ResourcesUnloadSample {
 		
 		Resource<Image> resource = resourceManager.get("BlackCompanyLogo");
 		
-		if (logger.isInfoEnabled())
+		if (logger.isInfoEnabled()) {
 			logger.info("Resource loaded: " + resource.isLoaded());
+		}
 		
 		resource.get();
 
-		if (logger.isInfoEnabled())
+		if (logger.isInfoEnabled()) {
 			logger.info("Resource loaded: " + resource.isLoaded());
+		}
 		
-		if (logger.isInfoEnabled())
+		if (logger.isInfoEnabled()) {
 			logger.info("Unloding all resources");
+		}
 		
 		resourceManager.unloadAll();
 		
-		if (logger.isInfoEnabled())
+		if (logger.isInfoEnabled()) {
 			logger.info("Resource loaded: " + resource.isLoaded());
+		}
 		
 
 	}

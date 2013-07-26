@@ -16,19 +16,22 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 		this.childResourceManager = childResourceManager;
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> Resource<T> get(K id) {
 		Resource resource = childResourceManager.get(id);
-		if (resource == null)
+		if (resource == null) {
 			return parentResourceManager.get(id);
+		}
 		return resource;
 	}
 
 	@Override
 	public <T> T getResourceValue(K id) {
 		T resourceValue = childResourceManager.getResourceValue(id);
-		if (resourceValue == null)
+		if (resourceValue == null) {
 			return parentResourceManager.getResourceValue(id);
+		}
 		return resourceValue;
 	}
 
@@ -37,12 +40,13 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 		childResourceManager.unloadAll();
 	}
 
-	public void add(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
+	@Override
+	public void add(K id, DataLoader dataLoader) {
 		childResourceManager.add(id, dataLoader);
 	}
 
 	@Override
-	public void addVolatile(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
+	public void addVolatile(K id, DataLoader dataLoader) {
 		childResourceManager.addVolatile(id, dataLoader);
 	}
 
@@ -53,15 +57,17 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 
 	@Override
 	public <T> Resource<T> getResourceFromIndex(int index) {
-		if (index < childResourceManager.getResourcesCount())
+		if (index < childResourceManager.getResourcesCount()) {
 			return childResourceManager.getResourceFromIndex(index);
+		}
 		return parentResourceManager.getResourceFromIndex(index - childResourceManager.getResourcesCount());
 	}
 
 	@Override
 	public K getKeyFromIndex(int index) {
-		if (index < childResourceManager.getResourcesCount())
+		if (index < childResourceManager.getResourcesCount()) {
 			return childResourceManager.getKeyFromIndex(index);
+		}
 		return parentResourceManager.getKeyFromIndex(index - childResourceManager.getResourcesCount());
 	}
 

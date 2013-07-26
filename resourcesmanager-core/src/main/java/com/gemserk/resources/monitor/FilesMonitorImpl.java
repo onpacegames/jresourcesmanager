@@ -12,10 +12,12 @@ public class FilesMonitorImpl implements FilesMonitor {
 	
 	private ArrayList<FileMonitor> fileMonitors = new ArrayList<FileMonitor>();
 
+	@Override
 	public void checkModifiedFiles() {
 		ArrayList<FileMonitor> tmpArraylist = new ArrayList<FileMonitor>(fileMonitors);
-		for (FileMonitor fileMonitor : tmpArraylist)
+		for (FileMonitor fileMonitor : tmpArraylist) {
 			fileMonitor.callHandlerIfModified();
+		}
 	}
 
 	public void monitor(File file, FileStatusChangedHandler fileStatusChangedHandler) {

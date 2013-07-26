@@ -92,11 +92,12 @@ public class JFrameCustomResourceLoaderSample {
 
 					Resource<Image> imageResource = resourceManager.get("GreenLogo");
 
+					@Override
 					public void paint(Graphics g) {
 						super.paint(g);
 						Image image = imageResource.get();
 						g.drawImage(image, getWidth() / 2 - image.getWidth(null) / 2, getHeight() / 2 - image.getHeight(null) / 2, null);
-					};
+					}
 
 				});
 
