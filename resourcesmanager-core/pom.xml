@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>1.0.0-OPG-SNAPSHOT</version>
 	</parent>
 	<artifactId>resourcesmanager-core</artifactId>
 	<name>ResourceManager - Core module</name>
